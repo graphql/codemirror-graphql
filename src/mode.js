@@ -275,10 +275,10 @@ function word(value) {
 }
 
 // A Name Token which will decorate the state with a `name`
-function name(style) {
+function name(style, fn = () => true) {
   return {
     style,
-    match: token => token.kind === 'Name',
+    match: token => token.kind === 'Name' && fn(token.value),
     update(state, token) {
       state.name = token.value;
     }
@@ -379,7 +379,7 @@ var ParseRules = {
   ],
   FragmentDefinition: [
     word('fragment'),
-    name('def'),
+    opt(name('def', value => value !== 'on')),
     'TypeCondition',
     list('Directive'),
     'SelectionSet'
