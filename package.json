@@ -43,7 +43,7 @@
     "codemirror": "^5.6.0"
   },
   "devDependencies": {
-    "babel-cli": "6.10.1",
+    "babel-cli": "6.16.0",
     "babel-eslint": "7.0.0",
     "babel-plugin-check-es2015-constants": "6.8.0",
     "babel-plugin-syntax-async-functions": "6.8.0",
