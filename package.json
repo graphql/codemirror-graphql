@@ -47,7 +47,7 @@
     "graphql": "^0.10.0"
   },
   "dependencies": {
-    "graphql-language-service-interface": "0.0.16",
+    "graphql-language-service-interface": "0.0.17",
     "graphql-language-service-parser": "^0.0.14"
   },
   "devDependencies": {
