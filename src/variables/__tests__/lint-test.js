@@ -72,6 +72,69 @@ describe('graphql-variables-lint', () => {
     });
   });
 
+  it('catches enum validation errors', async () => {
+    const errors = await printLintErrors(
+      'query ($foo: TestEnum) { f }',
+      ' { "foo": "NaN" }',
+    );
+
+    expect(errors[0]).to.deep.equal({
+      message: 'Expected value of type "TestEnum".',
+      severity: 'error',
+      type: 'validation',
+      from: {line: 0, ch: 10, sticky: null},
+      to: {line: 0, ch: 15, sticky: null},
+    });
+  });
+
+  it("doesn't throw an error on valid enum", async () => {
+    const errors = await printLintErrors(
+      'query ($foo: TestEnum) { f }',
+      ' { "foo": "RED" }',
+    );
+
+    expect(errors).to.have.lengthOf(0);
+  });
+
+  it('catches custom scalar (returning undefined) validation errors', async () => {
+    const errors = await printLintErrors(
+      'query ($foo: TestCustom) { f }',
+      ' { "foo": "doesntstartwithb" }',
+    );
+
+    expect(errors[0]).to.deep.equal({
+      message: 'Expected value of type "TestCustom".',
+      severity: 'error',
+      type: 'validation',
+      from: {line: 0, ch: 10, sticky: null},
+      to: {line: 0, ch: 28, sticky: null},
+    });
+  });
+
+  it('catches custom scalar (throwing an error) validation errors', async () => {
+    const errors = await printLintErrors(
+      'query ($foo: TestThrowingCustom) { f }',
+      ' { "foo": "doesntstartwithb" }',
+    );
+
+    expect(errors[0]).to.deep.equal({
+      message: 'Oups',
+      severity: 'error',
+      type: 'validation',
+      from: {line: 0, ch: 10, sticky: null},
+      to: {line: 0, ch: 28, sticky: null},
+    });
+  });
+
+  it("doesn't throw an error on valid custom scalar", async () => {
+    const errors = await printLintErrors(
+      'query ($foo: TestCustom) { f }',
+      ' { "foo": "bar" }',
+    );
+
+    expect(errors).to.have.lengthOf(0);
+  });
+
   it('reports unknown variable names', async () => {
     const errors = await printLintErrors(
       'query ($foo: Int) { f }',

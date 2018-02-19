@@ -163,7 +163,7 @@ function validateValue(type, valueAST) {
   }
 
   // Validate enums and custom scalars.
-  if (type instanceof GraphQLEnumType || type instanceof GraphQLScalarType) {
+  if (type instanceof GraphQLEnumType) {
     if (
       (valueAST.kind !== 'String' &&
         valueAST.kind !== 'Number' &&
@@ -172,6 +172,17 @@ function validateValue(type, valueAST) {
       isNullish(type.parseValue(valueAST.value))
     ) {
       return [[valueAST, `Expected value of type "${type}".`]];
+    }
+  }
+
+  // Validate enums and custom scalars.
+  if (type instanceof GraphQLScalarType) {
+    try {
+      if (type.parseLiteral(valueAST) === undefined) {
+        return [[valueAST, `Expected value of type "${type}".`]];
+      }
+    } catch (err) {
+      return [[valueAST, err.message || err]];
     }
   }
 

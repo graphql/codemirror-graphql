@@ -13,6 +13,7 @@ import {
   GraphQLUnionType,
   GraphQLInterfaceType,
   GraphQLEnumType,
+  GraphQLScalarType,
   GraphQLInputObjectType,
   GraphQLBoolean,
   GraphQLInt,
@@ -28,6 +29,34 @@ import {
 } from 'graphql';
 
 // Test Schema
+
+const TestCustom = new GraphQLScalarType({
+  name: 'TestCustom',
+  serialize: value => value,
+  parseValue: value => {
+    if (value && value.length && value[0] === 'b') {
+      return value;
+    }
+    return null;
+  },
+  parseLiteral: ast => {
+    if (ast.value && ast.value.length && ast.value[0] === 'b') {
+      return ast.value;
+    }
+    return undefined;
+  },
+});
+
+const TestThrowingCustom = new GraphQLScalarType({
+  name: 'TestThrowingCustom',
+  serialize: value => value,
+  parseValue: () => {
+    throw new Error('Oups');
+  },
+  parseLiteral: () => {
+    throw new Error('Oups');
+  },
+});
 
 const TestEnum = new GraphQLEnumType({
   name: 'TestEnum',
@@ -145,6 +174,8 @@ const TestType = new GraphQLObjectType({
         boolean: {type: GraphQLBoolean},
         id: {type: GraphQLID},
         enum: {type: TestEnum},
+        custom: {type: TestCustom},
+        throwingCustom: {type: TestThrowingCustom},
         object: {type: TestInputObject},
         // List
         listString: {type: new GraphQLList(GraphQLString)},
