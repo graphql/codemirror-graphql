@@ -162,7 +162,7 @@ function validateValue(type, valueAST) {
     return [[valueAST, `Expected value of type "${type}".`]];
   }
 
-  // Validate enums and custom scalars.
+  // Validate enums.
   if (type instanceof GraphQLEnumType) {
     if (
       (valueAST.kind !== 'String' &&
@@ -175,7 +175,7 @@ function validateValue(type, valueAST) {
     }
   }
 
-  // Validate enums and custom scalars.
+  // Validate custom scalars.
   if (type instanceof GraphQLScalarType) {
     try {
       if (type.parseLiteral(valueAST) === undefined) {
