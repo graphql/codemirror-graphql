@@ -201,7 +201,7 @@
     "prefer-reflect": 0,
     "prefer-spread": 0,
     "quote-props": [2, "as-needed", {"numbers": true}],
-    "quotes": [2, "single"],
+    "quotes": [2, "single", {"avoidEscape": true}],
     "radix": 2,
     "require-yield": 2,
     "semi": [2, "always"],
