@@ -81,10 +81,10 @@ describe('graphql-hint', () => {
       suggestions.list,
     );
 
-    const fieldTypes = fieldNames.map(name => fieldConfig[name].type);
+    const fieldTypes = fieldNames.map(name => String(fieldConfig[name].type));
     const expectedTypes = suggestions.list
       .filter(item => item.text !== '__schema' && item.text !== '__type')
-      .map(item => item.type);
+      .map(item => String(item.type));
     expect(fieldTypes).to.deep.equal(expectedTypes);
   });
 
