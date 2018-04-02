@@ -66,7 +66,7 @@ function onMouseOver(cm, e) {
     state.hoverTimeout = undefined;
     onMouseHover(cm, box);
   };
-  
+
   const hoverTime = getHoverTime(cm);
   state.hoverTimeout = setTimeout(onHover, hoverTime);
 
