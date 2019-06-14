@@ -1,6 +1,9 @@
 GraphQL mode for CodeMirror
 ===========================
 
+
+> ⚠️NOTICE!⚠️ This repository is about to be archived and join a monorepo.  Please make new PRs against the [ide-monorepo branch](https://github.com/graphql/graphiql/tree/ide-monorepo)
+
 [![Build Status](https://travis-ci.org/graphql/codemirror-graphql.svg?branch=master)](https://travis-ci.org/graphql/codemirror-graphql)
 
 Provides CodeMirror with a parser mode for GraphQL along with a live linter and
