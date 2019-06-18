@@ -1,8 +1,6 @@
-GraphQL mode for CodeMirror
-===========================
+# GraphQL mode for CodeMirror (this repository moved to GraphQL IDE Monorepo)
 
-
-> ⚠️NOTICE!⚠️ This repository is about to be archived and join a monorepo.  Please make new PRs against the [ide-monorepo branch](https://github.com/graphql/graphiql/tree/ide-monorepo)
+> ⚠️NOTICE!⚠️ This repository is about to be archived and is now part of a monorepo.  Please make new PRs and issues in the [GraphQL IDE Monorepo](https://github.com/graphql/graphiql)
 
 [![Build Status](https://travis-ci.org/graphql/codemirror-graphql.svg?branch=master)](https://travis-ci.org/graphql/codemirror-graphql)
 
